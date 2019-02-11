@@ -1,0 +1,30 @@
+Containers are just stateful components
+
+
+For arrow functions, use curly braces if doing any logic, 
+parentheses if just returning something
+
+dont determine whether or not your component is a container 
+(is stateful) by whether or not its a class. all 
+components can be created as classes its just good practice
+to have most as functions
+
+in BuildControls.js the key is used for each build control is the label
+as this is a unique identifier. there will not be another
+buildcontrol with the same label
+
+can have css classes with the same name in different files (modules)
+as they are converted to scoped names. eg a logo class module,
+a logo class in toolbar and a logo class in sidedrawer
+
+to pass a boolean prop to a component, can just pass prop name if true
+
+wrapping elements control the updating of wrapped elements. clicking 
+more or less changes state.ingredients. order summary component uses it this
+so is re rendered everytime even though we dont need to show it. we use 
+component should update in the wrapping component (modal) to only update 
+if it needs to be shown (props.show is true)
+
+The <></> syntax does not accept attributes, including keys.
+If keyed fragment needed can use <Fragment />, import Fragment
+just like component
