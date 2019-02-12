@@ -28,3 +28,10 @@ if it needs to be shown (props.show is true)
 The <></> syntax does not accept attributes, including keys.
 If keyed fragment needed can use <Fragment />, import Fragment
 just like component
+
+Routing is not part of the standard React library. We will add a router package that
+parses URL/Path, read the config, then render the right jsx
+
+even if router is used at app level only components loaded directly through a route
+(eg in component attribute of <Route>) have access to axios' history and match 
+location props. can use withRouter HOC on component to get round this 
