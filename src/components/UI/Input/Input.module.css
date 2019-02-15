@@ -29,3 +29,8 @@
     border: 1px solid rgb(235, 81, 81);
     background-color: rgb(231, 180, 180);
 }
+
+.ValidationErrorMessage{
+    color: red;
+    margin: 5px 0;
+}

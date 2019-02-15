@@ -3,12 +3,18 @@ import styles from './Input.module.css';
 
 const input = (props) => {
     let inputElement =  null;
+    let validationErrorMsg = null;
     const classNames = [styles.InputElement];
 
-    if(props.invalid){
+    if(props.invalid && props.shouldValidate){
         classNames.push(styles.Invalid);
+        validationErrorMsg = (
+            <p className={styles.ValidationErrorMessage}>
+                Please enter a valid {props.elementConfig.type}
+            </p>
+        )
     }
-console.log(classNames);
+    
     switch(props.elementType){
         case('input'):
             inputElement = (
@@ -46,6 +52,7 @@ console.log(classNames);
         <div className={styles.Input}>
             <label className={styles.label}>{props.label}</label>
             {inputElement}
+            {validationErrorMsg}
         </div>
     )
 }
