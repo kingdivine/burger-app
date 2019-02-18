@@ -17,7 +17,6 @@ const order = (props) => {
            <span className={styles.Ingredient} key={ingredient.name}>{ingredient.name} ({ingredient.amount})</span>
        )
    })
-   console.log(ingredientOutput);
     return(
         <div className={styles.Order}>
             <p>Ingredients: {ingredientOutput} </p>

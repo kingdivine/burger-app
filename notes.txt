@@ -1,6 +1,5 @@
 Containers are just stateful components
 
-
 For arrow functions, use curly braces if doing any logic, 
 parentheses if just returning something
 
@@ -35,3 +34,9 @@ parses URL/Path, read the config, then render the right jsx
 even if router is used at app level only components loaded directly through a route
 (eg in component attribute of <Route>) have access to axios' history and match 
 location props. can use withRouter HOC on component to get round this 
+
+
+With redux, if the state of a component is not relevant to the whole
+app, just use local state
+
+
