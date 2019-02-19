@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import styles from './ContactData.module.css';
@@ -69,6 +71,9 @@ class ContactData extends Component{
                         {value: 'delivery', displayValue: 'Deliver to me'}
                     ]
                 },
+                validation:{
+                    required: false,
+                },
                 value:'collection',
                 valid:true
             },
@@ -88,7 +93,7 @@ class ContactData extends Component{
         }
         const order = {
             ingredients: this.props.ingredients,
-            price: this.props.price,
+            price: this.props.totalPrice,
             contactData: formData
         }
         axios.post('/orders.json', order)
@@ -177,4 +182,12 @@ class ContactData extends Component{
     }
 }
 
-export default ContactData;
+
+const mapStateToProps = (state) =>{
+    return{
+        ingredients: state.ingredients,
+        totalPrice: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(ContactData);
