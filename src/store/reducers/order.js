@@ -1,12 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 
-intitalState ={
+const intitialState ={
     orders:[],
     loading: false
 }
 
 
-const reducer = (state = intitalState, action) =>{
+const reducer = (state = intitialState, action) =>{
     switch(action.type){
         case actionTypes.PURCHASE_BURGER_SUCCESS:
             const newOrder ={
@@ -32,3 +32,5 @@ const reducer = (state = intitalState, action) =>{
             return state    
     }
 }
+
+export default reducer;
