@@ -179,7 +179,7 @@ const mapStateToProps = (state) =>{
     return{
         ingredients: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
-        loading: state.orders.loading
+        loading: state.burgerBuilder.loading
     }
 }
 
