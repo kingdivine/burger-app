@@ -96,6 +96,7 @@ class ContactData extends Component{
             contactData: formData
         }
        this.props.onOrderBurger(order);
+       this.props.history.push('/');
     }
 
 
