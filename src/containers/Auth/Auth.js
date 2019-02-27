@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import styles from '../Auth/Auth.module.css';
 
 import * as actions from '../../store/actions/index';
@@ -37,7 +39,8 @@ class Auth extends Component{
                 valid: false,
                 touched: false
             }
-        }
+        },
+        isSignUp: true
     }
 
     inputChangedHandler = (event, controlName) =>{
@@ -68,10 +71,19 @@ class Auth extends Component{
 
     submitHandler = (event) =>{
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value,this.state.controls.password.value )
+        this.props.onAuth(this.state.controls.email.value,
+                        this.state.controls.password.value,
+                        this.state.isSignUp )
+    }
+
+    switchAuthMode = () =>{
+        this.setState( prevState => {
+            return {isSignUp: !prevState.isSignUp}
+        })
     }
 
     render(){
+        const redirectPath = new URLSearchParams(this.props.location.search).get('checkout') ? '/checkout' : '/';
         const formElements = Object.entries(this.state.controls).map((field) =>(
             <Input 
                 key={field[0]} 
@@ -87,13 +99,30 @@ class Auth extends Component{
                 {formElements}
                 <Button 
                     buttonType="Success" >
-                    SIGN IN
+                   {this.state.isSignUp ? 'SIGN UP' : 'SIGN IN'}
                 </Button>
             </form>
         )
+        if(this.props.loading){
+            form = <Spinner/>
+        }
+        const errorMsg = this.props.error ? (<p>Error authenticating: {this.props.error}</p>) : null;
+
+        let redirect = null;
+        if(this.props.isAuthenticated){
+            
+            redirect = <Redirect to={redirectPath}/>
+        }
         return(
             <div className={styles.Auth}>
+                {redirect}
+                {errorMsg}
                 {form}
+                <Button 
+                    buttonType="Danger" 
+                    clicked={this.switchAuthMode}>
+                    SWITCH TO  {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}
+                </Button>
             </div>
         )
     }
@@ -101,13 +130,15 @@ class Auth extends Component{
 
 const mapStateToProps = (state) =>{
     return{
-
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     };
 }
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        onAuth: (email, password) => dispatch (actions.tryAuth(email, password))
+        onAuth: (email, password, isSignUp) => dispatch (actions.tryAuth(email, password, isSignUp))
     };
 }
 

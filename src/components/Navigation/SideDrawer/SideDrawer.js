@@ -5,7 +5,7 @@ import styles from './SideDrawer.module.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const sideDrawer = (props) => {
-    const attachedClasses = [styles.SideDrawer, props.open ? styles.open : styles.Close];
+    const attachedClasses = [styles.SideDrawer, props.open ? styles.Open : styles.Close];
     
     return(
         <>
@@ -15,7 +15,7 @@ const sideDrawer = (props) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems isAuthenticated={props.isAuthenticated} />
                 </nav>
             </div>
         </>
