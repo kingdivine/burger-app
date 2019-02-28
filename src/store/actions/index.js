@@ -7,5 +7,5 @@ export {
 } from './order'; 
 
 export {
-    tryAuth, authLogout
+    tryAuth, authLogout, authCheckState
 } from './auth';
