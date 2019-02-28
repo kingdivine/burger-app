@@ -110,7 +110,6 @@ class Auth extends Component{
 
         let redirect = null;
         if(this.props.isAuthenticated){
-            
             redirect = <Redirect to={redirectPath}/>
         }
         return(
