@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Layout from './hoc/Layout/Layout';
@@ -16,17 +16,37 @@ class App extends Component {
   }
 
   render() {
+    let routes = (
+      <>
+        <Route path="/" exact component={BurgerBuilder} />
+        <Route path="/auth" component={Auth}/>
+        <Redirect to="/"/>
+      </>
+    );
+    if(this.props.isAuthenticated){
+      routes = (
+        <>
+          <Route path="/" exact component={BurgerBuilder} />
+          <Route path="/logout" component={Logout}/>
+          <Route path="/checkout" component={Checkout}/>
+          <Route path="/orders" component={Orders}/>
+          <Redirect to="/"/>
+        </>
+      );
+    }
     return (
       <div >
         <Layout>
-          <Route path="/" exact component={BurgerBuilder} />
-          <Route path="/checkout" component={Checkout}/>
-          <Route path="/orders" component={Orders}/>
-          <Route path="/auth" component={Auth}/>
-          <Route path="/logout" component={Logout}/>
+          {routes}
         </Layout>
       </div>
     );
+  }
+}
+
+const mapStateToProps = (state) =>{
+  return{
+    isAuthenticated: state.auth.token !== null 
   }
 }
 
@@ -36,4 +56,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

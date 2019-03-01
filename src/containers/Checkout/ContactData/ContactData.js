@@ -93,7 +93,8 @@ class ContactData extends Component{
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.totalPrice,
-            contactData: formData
+            contactData: formData,
+            userId: this.props.userId
         }
        this.props.onOrderBurger(order, this.props.authToken);
        this.props.history.push('/');
@@ -180,7 +181,8 @@ const mapStateToProps = (state) =>{
         ingredients: state.burgerBuilder.ingredients,
         totalPrice: state.burgerBuilder.totalPrice,
         loading: state.burgerBuilder.loading,
-        authToken: state.auth.token
+        authToken: state.auth.token,
+        userId: state.auth.userId
     }
 }
 
