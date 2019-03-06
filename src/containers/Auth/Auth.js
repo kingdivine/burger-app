@@ -8,6 +8,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import styles from '../Auth/Auth.module.css';
 
 import * as actions from '../../store/actions/index';
+import {checkFieldValidity} from '../../shared/utility';
 
 class Auth extends Component{
     state={
@@ -49,7 +50,7 @@ class Auth extends Component{
             [controlName]:{
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: this.checkFieldValidity(event.target.value,this.state.controls[controlName].validation),
+                valid: checkFieldValidity(event.target.value,this.state.controls[controlName].validation),
                 touched: true
             }
         };
@@ -58,16 +59,6 @@ class Auth extends Component{
         })
     }
 
-    checkFieldValidity = (value, rules) =>{
-        let isValid = false;
-        if(rules && rules.required){
-            isValid = value.trim() !== '';
-        }
-        if(rules && rules.minLength && isValid){
-            isValid = value.length >= rules.minLength;
-        }
-        return isValid;
-    }
 
     submitHandler = (event) =>{
         event.preventDefault();
@@ -109,7 +100,6 @@ class Auth extends Component{
 
         const redirectPath = new URLSearchParams(this.props.location.search).get('checkout') ? '/checkout' : '/';
         let redirect = null;
-        console.log("is auth: " + this.props.isAuthenticated);
         if(this.props.isAuthenticated){
             redirect = <Redirect to={redirectPath}/>
         }

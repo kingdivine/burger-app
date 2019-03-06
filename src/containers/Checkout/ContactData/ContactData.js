@@ -8,6 +8,7 @@ import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
+import {checkFieldValidity} from '../../../shared/utility';
 
 class ContactData extends Component{
     state ={
@@ -103,7 +104,7 @@ class ContactData extends Component{
 
     inputChangedHandler = (event, inputId) =>{
         const newValue = event.target.value;
-        const isFieldValid = this.checkFieldValidity(newValue, this.state.orderForm[inputId].validation);
+        const isFieldValid = checkFieldValidity(newValue, this.state.orderForm[inputId].validation);
         const formIsValid = isFieldValid && this.checkFormValidity();
         this.setState(
             prevState => ({
@@ -121,16 +122,6 @@ class ContactData extends Component{
         );
     }
 
-    checkFieldValidity = (value, rules) =>{
-        let isValid = false;
-        if(rules && rules.required){
-            isValid = value.trim() !== '';
-        }
-        if(rules && rules.minLength && isValid){
-            isValid = value.length >= rules.minLength;
-        }
-        return isValid;
-    }
 
     checkFormValidity = () =>{
         const validities = Object.entries(this.state.orderForm).map((field) =>(
