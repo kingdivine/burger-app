@@ -83,7 +83,6 @@ class Auth extends Component{
     }
 
     render(){
-        const redirectPath = new URLSearchParams(this.props.location.search).get('checkout') ? '/checkout' : '/';
         const formElements = Object.entries(this.state.controls).map((field) =>(
             <Input 
                 key={field[0]} 
@@ -108,7 +107,9 @@ class Auth extends Component{
         }
         const errorMsg = this.props.error ? (<p>Error authenticating: {this.props.error}</p>) : null;
 
+        const redirectPath = new URLSearchParams(this.props.location.search).get('checkout') ? '/checkout' : '/';
         let redirect = null;
+        console.log("is auth: " + this.props.isAuthenticated);
         if(this.props.isAuthenticated){
             redirect = <Redirect to={redirectPath}/>
         }
