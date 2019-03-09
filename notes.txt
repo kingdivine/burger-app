@@ -47,6 +47,8 @@ An action is just a js object with a type(usually all caps), and a payload
 
 A reducer takes previous state and an action and returns a new state
 
+Redux Thunk is a middleware that lets you call action creators that return a function instead 
+of an action object.
 
 
 https://medium.freecodecamp.org/modern-frontend-hacking-cheatsheets-df9c2566c72a
