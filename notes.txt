@@ -54,3 +54,7 @@ of an action object.
 https://medium.freecodecamp.org/modern-frontend-hacking-cheatsheets-df9c2566c72a
 
 ^this is beautiful
+
+https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3
+
+^Explains the whole work flow. v good
